@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :questions do
+    resources :answers, only: [:create, :new, :edit, :update, :destroy]
+  end
+
+  resources :sessions, only: [:new, :create, :destroy]
+
+  resources :users, only: [:new, :create, :show]
+
+  get 'questions/recent' => 'questions#recent'
+  get 'questions/trending' => 'questions#trending'
+  get 'question/popular' => 'questions#popular'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
