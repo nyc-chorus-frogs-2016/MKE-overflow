@@ -2,13 +2,14 @@ class SessionsController < ApplicationController
   skip_before_action :ensure_current_user
 
   def new
+    
   end
 
   def create
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash.notice = 'Welcome back'
+      flash.notice = "Welcome back #{user}"
       redirect_to questions_path
     else
       flash[:error] = 'Login failed'
