@@ -1,0 +1,8 @@
+<%= @question.title %> : <%= @question.content %>
+
+<ul>
+  <% @question.answers.each do |answer| %>
+    <li><%= answer.content %></li>
+    <li><%= answer.user.username %></li>
+  <% end %>
+</ul>
