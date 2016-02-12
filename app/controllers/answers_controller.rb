@@ -9,15 +9,24 @@ class AnswersController < ApplicationController
   end
 
   def edit
-
+    @answer = Answer.find_by(id: params[:id])
   end
 
   def update
-
+    @answer = Answer.find_by(id: params[:id])
+    if @answer.update(answer_params)
+      flash[:notice] = 'Update to your answer was saved'
+      redirect_to question_path(@answer.question)
+    else
+      flash[:error] = 'Please try again'
+      render :edit
+    end
   end
 
   def destroy
-
+    answer = Answer.find_by(id: params[:id])
+    answer.destroy
+    redirect_to question_path(answer.question)
   end
   private
 
@@ -26,7 +35,7 @@ class AnswersController < ApplicationController
     if @answer.save
       flash[:notice] = 'Thank you for submitting an answer!'
     else
-      flash[:alert] ='Sorry, your comment fialed to save, please try again'
+      flash[:alert] ='Sorry, your comment failed to save, please try again'
     end
     redirect_to question_path(@question)
   end

@@ -8,10 +8,14 @@
   <h3> Current Answers </h3>
   <% @question.answers.each do |answer| %>
   <li>Content:<%= answer.content %></li>
+   <% if current_user == answer.user %>
+  <li><%= link_to 'Edit Answer', edit_question_answer_path(@question, answer)%></li>
+  <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
+  <%end%>
   <li>Author:<%= answer.user.username %></li>
   <% end %>
 </ul>
-<% if logged_in?%>
+<% if logged_in? && current_user != @question.user%>
   <%= form_for [@question, @answer] do |f| %>
   <div>
     <%= f.label :content%>
