@@ -20,6 +20,10 @@ class Question < ActiveRecord::Base
     votes.sum(:vote_amount)
   end
 
+  def sort_answers
+    answers.joins(:votes).group(:id).order('sum (votes.vote_amount) desc')
+  end
+
 end
 
   def locked?(question)
