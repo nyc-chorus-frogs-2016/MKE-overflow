@@ -1,17 +1,17 @@
-# class VotesController < ApplicationController
-#   def new
-#     @vote = Vote.new
-#   end
+class VotesController < ApplicationController
+  def new
+    @vote = Vote.new
+  end
 
-#   def create
+  def create
 
-#   end
+  end
 
-#   def edit
+  def edit
 
-#   end
+  end
 
-#   def update
+  def update
 
-#   end
-# end
+  end
+end

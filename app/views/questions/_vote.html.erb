@@ -1,7 +1,6 @@
 Vote Total:<%=@question.total_votes%>
 
 <% if logged_in? && current_user != @question.user && current_user.has_voted?(@question) == false%>
-<% if current_user.has_voted? == false%>
   <%= link_to 'Upvote', upvote_question_path(@question), method: :post %>
   <%= link_to 'Downvote', downvote_question_path(@question), method: :post%>
   <%end%>
