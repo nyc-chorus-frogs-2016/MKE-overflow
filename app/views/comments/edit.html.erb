@@ -1,10 +1,13 @@
-<h1>New Comment for <%= @context.content %></h1>
+
+<h1>Edit Comment for <%= @context.content %></h1>
 
 
-<%= form_for [@context, @comment], url: question_answer_comments_path(@context.question_id, @context.id), method: :post do |f| %>
+<%= form_for [@context, @comment], url: edit_two_url(@context, @comment), method: :put do |f| %>
   <div class="form-group">
     <%= f.label :content %>
     <%= f.text_area :content, class: "form-control", placeholder: "Enter a comment here." %>
   </div>
   <%= f.submit %>
 <% end %>
+
+
