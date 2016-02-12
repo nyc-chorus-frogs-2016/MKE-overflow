@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   end
 
   def self.most_votes
-    # something like Question.joins(:votes).group("voteable.id").order("count("questions.id) DESC")
+    Question.joins(:votes).group(:id).order('sum (votes.vote_amount) desc')
   end
 
   def self.trending

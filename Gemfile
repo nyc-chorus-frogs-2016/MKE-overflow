@@ -24,6 +24,7 @@ gem 'httparty'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rspec-rails'
 gem 'pry'
+gem 'table_print'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
