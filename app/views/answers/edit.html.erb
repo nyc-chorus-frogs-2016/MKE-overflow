@@ -1,0 +1,15 @@
+<% if @answer.errors.any? %>
+  <ul>
+    <% @answer.errors.full_messages.each do |msg| %>
+       <li class="error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for [@answer.question, @answer], url: question_answer_path(@answer.question, @answer), method: :patch do |f| %>
+    <div>
+      <%= f.label :content %>
+      <%= f.text_field :content %>
+    </div>
+  <%= f.submit %>
+<% end %>
