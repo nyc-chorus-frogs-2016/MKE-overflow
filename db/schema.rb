@@ -11,38 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160211220424) do
-
-ActiveRecord::Schema.define(version: 20160211222209) do
-
+ActiveRecord::Schema.define(version: 20160212160900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-
     t.text     "content",     null: false
     t.integer  "user_id",     null: false
     t.integer  "question_id", null: false
-
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "question_id"
-
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-
-
-  create_table "questions", force: :cascade do |t|
-    t.string   "title",      null: false
-    t.string   "content",    null: false
-    t.integer  "user_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 
   create_table "comments", force: :cascade do |t|
     t.string   "content",          null: false
@@ -55,6 +35,13 @@ ActiveRecord::Schema.define(version: 20160211222209) do
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
 
+  create_table "questions", force: :cascade do |t|
+    t.string   "title",      null: false
+    t.string   "content",    null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
@@ -62,5 +49,16 @@ ActiveRecord::Schema.define(version: 20160211222209) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id",           null: false
+    t.integer  "vote_amount",       null: false
+    t.integer  "votable_type_id"
+    t.string   "votable_type_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "votes", ["votable_type_type", "votable_type_id"], name: "index_votes_on_votable_type_type_and_votable_type_id", using: :btree
 
 end

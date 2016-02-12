@@ -17,3 +17,10 @@ end
 15.times do
 	Answer.create!(content: Faker::Hipster.paragraph, question_id: Question.all.sample.id, user_id: User.all.sample.id)
 end
+
+25.times do
+  Comment.create!(content: Faker::Hipster.paragraph, commentable_id: Question.all.sample.id,  user_id: User.all.sample.id, commentable_type: "Question" )
+end
+25.times do
+  Comment.create!(content: Faker::Hipster.paragraph, commentable_id: Answer.all.sample.id,  user_id: User.all.sample.id, commentable_type: "Answer" )
+end
