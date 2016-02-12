@@ -1,4 +1,7 @@
 <%= @question.title %> : <%= @question.content %>
+<% if current_user == @question.user %>
+  <%= link_to 'Delete post', question_path(@question), method: :delete %>
+<% end %>
 
 <ul>
   <% @question.answers.each do |answer| %>

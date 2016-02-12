@@ -1,6 +1,15 @@
+<% if logged_in? %>
+  <%= link_to 'Post a question', new_question_path %>
+<% end %>
+
 <ul>
   <% @questions.each do |question| %>
   <li><%=question.title%></li>
   <li><%=question.content%></li>
+  <% if current_user == question.user %>
+    <%= link_to 'Delete post', question_path(question), method: :delete %>
+  <% end %>
+  <!-- REmove this later -->
+  <br></br>
   <% end %>
 </ul>

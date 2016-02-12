@@ -10,10 +10,10 @@
   User.create!(username: Faker::Internet.user_name, password: "123")
 end
 
-15.times do 
-	Question.create!(title: Faker::Name.title, content: Faker::Hipster.paragraph, user_id: User.all.sample)
+15.times do
+	Question.create!(title: Faker::Name.title, content: Faker::Hipster.paragraph, user_id: User.all.sample.id)
 end
 
-15.times do 
-	Answer.create!(content: Faker::Hipster.paragraph, question_id: Question.all.sample, user_id: User.all.sample)
+15.times do
+	Answer.create!(content: Faker::Hipster.paragraph, question_id: Question.all.sample.id, user_id: User.all.sample.id)
 end
