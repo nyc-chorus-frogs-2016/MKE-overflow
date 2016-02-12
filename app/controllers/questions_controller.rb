@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find_by(id: params[:id])
+    @answer = Answer.new
   end
 
   def new
@@ -23,20 +24,29 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    @question = Question.find_by(id: params[:id])
   end
 
   def update
-  end
-
-  def destroy
     @question = Question.find_by(id: params[:id])
-    @question.destroy
-    redirect_to questions_path
+    if @question.update_attributes(question_params)
+      flash[:notice] = 'Update to your question was saved'
+      redirect_to root_path
+    else
+      flash[:error] = 'Please try again'
+      render :edit
+    end
   end
 
-  private
+    def destroy
+      @question = Question.find_by(id: params[:id])
+      @question.destroy
+      redirect_to questions_path
+    end
 
-  def question_params
-    params.require(:question).permit(:content, :title).merge(user_id: current_user.id)
+    private
+
+    def question_params
+      params.require(:question).permit(:content, :title).merge(user_id: current_user.id)
+    end
   end
-end

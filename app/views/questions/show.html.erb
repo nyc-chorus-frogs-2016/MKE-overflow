@@ -1,11 +1,22 @@
-<%= @question.title %> : <%= @question.content %>
-<% if current_user == @question.user %>
-  <%= link_to 'Delete post', question_path(@question), method: :delete %>
-<% end %>
 
+<h1><%= @question.title %></h1> : <%= @question.content %>
+<% if current_user == @question.user %>
+<%= link_to 'Delete post', question_path(@question), method: :delete %>
+<% end %>
 <ul>
+  <h3> Current Answers </h3>
   <% @question.answers.each do |answer| %>
-    <li><%= answer.content %></li>
-    <li><%= answer.user.username %></li>
+  <li>Content:<%= answer.content %></li>
+  <li>Author:<%= answer.user.username %></li>
   <% end %>
 </ul>
+
+<%= form_for [@question, @answer] do |f| %>
+<div>
+  <%= f.label :content%>
+  <%= f.text_field :content%>
+</div>
+<div>
+  <%= f.submit value='Add answer'%>
+</div>
+<%end%>
