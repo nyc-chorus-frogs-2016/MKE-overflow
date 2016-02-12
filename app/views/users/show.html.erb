@@ -1,0 +1,11 @@
+<h1> Hi <%=current_user.username%>. Great to see you. </h1>
+<h2> Here are all of the questions you've submitted: </h2>
+  <ul><% current_user.questions.each do |question| %>
+    <li><%= link_to question.title, question_path(question) %> got <%=question.total_votes%> votes</li>
+    <% end %>
+  </ul>
+<h2> Here are all of the answers you've submitted: </h2>
+  <ul><% current_user.answers.each do |answer| %>
+    <li><%= link_to answer.content, question_path(answer.question) %> got <%=answer.total_votes%> votes</li>
+    <% end %>
+  </ul>

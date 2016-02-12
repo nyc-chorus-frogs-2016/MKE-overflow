@@ -22,16 +22,17 @@ class AnswersController < ApplicationController
       render :edit
     end
   end
+
   def upvote
     @answer = Answer.find(params[:id])
     @answer.votes.create(user_id: current_user.id, votable_id: @answer.id, vote_amount: 1)
-    redirect_to answer_path(@answer)
+    redirect_to question_path(@answer.question)
   end
 
   def downvote
     @answer = Answer.find(params[:id])
     @answer.votes.create(user_id: current_user.id, votable_id: @answer.id, vote_amount: -1)
-    redirect_to answer_path(@answer)
+    redirect_to question_path(@answer.question)
   end
 
   def destroy
