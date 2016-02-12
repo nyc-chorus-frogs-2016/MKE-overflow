@@ -28,6 +28,7 @@ class AnswersController < ApplicationController
     answer.destroy
     redirect_to question_path(answer.question)
   end
+
   private
 
   def create_answer(question)

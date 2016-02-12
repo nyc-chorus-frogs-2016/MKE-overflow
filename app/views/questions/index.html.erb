@@ -4,6 +4,7 @@
 
 <ul>
   <% @questions.each do |question| %>
+    Upvotes:<%=question.total_votes%>
   <li><%= link_to question.title, question_path(question)%></li>
   <%= long_form_date(question.created_at) %>
   <li><%= question.user.username%></li>

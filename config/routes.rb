@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :new, :edit, :update, :destroy] do
       resources :comments, only: [:created, :new, :edit, :update, :destroy]
       resources :votes, only: [:created, :new, :edit, :update, :destroy]
+       member do
+        post 'upvote'
+        post 'downvote'
+      end
     end
   end
 
