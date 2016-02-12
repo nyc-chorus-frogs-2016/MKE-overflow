@@ -3,8 +3,8 @@ Rails.application.routes.draw do
       resources :comments
       resources :votes
     resources :answers, only: [:create, :new, :edit, :update, :destroy] do
-      resources :comments, only: [:created, :new, :edit, :update, :destroy]
-      resources :votes, only: [:created, :new, :edit, :update, :destroy]
+      resources :comments, only: [:create, :new, :edit, :update, :destroy]
+      resources :votes, only: [:create, :new, :edit, :update, :destroy]
     end
   end
 

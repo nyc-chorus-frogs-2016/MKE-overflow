@@ -1,7 +1,7 @@
 
 <% if logged_in? && current_user != @question.user%>
 <% if current_user.has_voted? == false%>
-  <%= link_to 'Upvote', {:vote_amount = +1} %>
-  <%= link_to 'Downvote', {:vote_amount = -1}%>
+  <%= link_to 'Upvote', {} %>
+  <%= link_to 'Downvote', {}%>
   <%end%>
 <%end%>
