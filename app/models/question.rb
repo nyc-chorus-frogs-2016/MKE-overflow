@@ -21,3 +21,11 @@ class Question < ActiveRecord::Base
   end
 
 end
+
+  def locked?(question)
+     if question.status == "lock"
+    return true
+  else
+    false
+  end
+end
