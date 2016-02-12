@@ -78,12 +78,7 @@ class QuestionsController < ApplicationController
 
   private
 
-  def question_params
-    params.require(:question).permit(:content, :title).merge(user_id: current_user.id)
-
     def question_params
       params.require(:question).permit(:content, :title, :status).merge(user_id: current_user.id)
     end
-
-  end
 end
