@@ -15,4 +15,16 @@ class Question < ActiveRecord::Base
   def self.trending
     # how are we defining questions
   end
+
+  def upvote
+    @question = Question.find(params[:id])
+    @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: 1)
+    redirect_to root_path
+  end
+
+  def downvote
+    @question = Question.find(params[:id])
+    @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: -1)
+    redirect_to root_path
+  end
 end
