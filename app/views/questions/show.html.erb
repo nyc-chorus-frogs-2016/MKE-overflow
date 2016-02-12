@@ -1,22 +1,24 @@
-
-<%=render 'vote', layout: false, locals: {question: @question}%>
+<%= render partial: "vote_question", layout: false, object: @question %>
 <h1><%= @question.title %></h1> : <%= @question.content %></h1>
 
 <% if current_user == @question.user %>
-<%= link_to 'Delete post', question_path(@question), method: :delete %>
-<%= link_to 'Edit post', edit_question_path(@question)%>
+  <%= link_to 'Delete post', question_path(@question), method: :delete %>
+  <%= link_to 'Edit post', edit_question_path(@question)%>
 <% end %>
+
 <ul>
   <h3> Current Answers </h3>
   <% @question.answers.each do |answer| %>
-  <li>Content:<%= answer.content %></li>
-   <% if current_user == answer.user %>
-  <li><%= link_to 'Edit Answer', edit_question_answer_path(@question, answer)%></li>
-  <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
-  <%end%>
+    <%= render partial: "vote_answer", layout: false, object: answer %>
+    <li>Content:<%= answer.content %></li>
+     <% if current_user == answer.user %>
+      <li><%= link_to 'Edit Answer', edit_question_answer_path(@question, answer)%></li>
+      <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
+    <%end%>
   <li>Author:<%= answer.user.username %></li>
   <% end %>
 </ul>
+
 <% if logged_in? && current_user != @question.user%>
   <%= form_for [@question, @answer] do |f| %>
   <div>

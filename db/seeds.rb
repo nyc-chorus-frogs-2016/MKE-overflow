@@ -14,7 +14,7 @@ end
 	Question.create!(title: Faker::Name.title, content: Faker::Hipster.paragraph, user_id: User.all.sample.id)
 end
 
-15.times do
+50.times do
 	Answer.create!(content: Faker::Hipster.paragraph, question_id: Question.all.sample.id, user_id: User.all.sample.id)
 end
 

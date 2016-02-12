@@ -6,15 +6,11 @@ class User < ActiveRecord::Base
 	has_many :comments
 	validates :username, presence: true, uniqueness: true
 
-  def has_voted?(question)
-    @response = :true
-    self.votes.each do |vote|
-      if question.votes.include?(vote)
-        @response = true
-      else
-        @response = false
-      end
-    end
-    @response
+  def has_voted_question?(question)
+    votes.where(votable_id: question.id, votable_type: 'Question').count > 0
+  end
+
+  def has_voted_answer?(answer)
+    votes.where(votable_id: answer.id, votable_type: 'Answer').count > 0
   end
 end
