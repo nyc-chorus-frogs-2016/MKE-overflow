@@ -1,5 +1,7 @@
 
-<h1><%= @question.title %></h1> : <%= @question.content %>
+<%=render 'vote', layout: false, locals: {question: @question}%>
+<h1><%= @question.title %></h1> : <%= @question.content %></h1>
+
 <% if current_user == @question.user %>
 <%= link_to 'Delete post', question_path(@question), method: :delete %>
 <%= link_to 'Edit post', edit_question_path(@question)%>
