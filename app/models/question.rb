@@ -16,15 +16,12 @@ class Question < ActiveRecord::Base
     # how are we defining questions
   end
 
-  def upvote
-    @question = Question.find(params[:id])
-    @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: 1)
-    redirect_to root_path
+  def total_votes
+    @vote_total = 0
+    self.votes.each do |vote|
+      @vote_total += vote.vote_amount
+    end
+    @vote_total
   end
 
-  def downvote
-    @question = Question.find(params[:id])
-    @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: -1)
-    redirect_to root_path
-  end
 end

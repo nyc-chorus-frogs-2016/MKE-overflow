@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20160212160900) do
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "question_id"
+    t.text     "content",     null: false
+    t.integer  "user_id",     null: false
+    t.integer  "question_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -51,14 +51,14 @@ ActiveRecord::Schema.define(version: 20160212160900) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "user_id",           null: false
-    t.integer  "vote_amount",       null: false
-    t.integer  "votable_type_id"
-    t.string   "votable_type_type"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "user_id",      null: false
+    t.integer  "vote_amount",  null: false
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "votes", ["votable_type_type", "votable_type_id"], name: "index_votes_on_votable_type_type_and_votable_type_id", using: :btree
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
 
 end
