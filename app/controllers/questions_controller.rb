@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all
+    @questions = Question.most_recent
   end
 
   def show
