@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find_by(id: params[:id])
     @answer = Answer.new
+    @answers = @question.sort_answers
   end
 
   def new

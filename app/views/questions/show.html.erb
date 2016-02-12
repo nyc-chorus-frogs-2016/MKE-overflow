@@ -16,7 +16,7 @@
   <% if @question.status == 'lock'%>
   <h4>This post is locked</h4>
   <% end %>
-  <% @question.answers.each do |answer| %>
+  <% @answers.each do |answer| %>
     <%= render partial: "vote_answer", layout: false, object: answer %>
     <li>Content:<%= answer.content %></li>
      <% if current_user == answer.user %>
