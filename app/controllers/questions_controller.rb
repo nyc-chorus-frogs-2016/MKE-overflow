@@ -38,15 +38,27 @@ class QuestionsController < ApplicationController
     end
   end
 
-    def destroy
-      @question = Question.find_by(id: params[:id])
-      @question.destroy
-      redirect_to questions_path
-    end
-
-    private
-
-    def question_params
-      params.require(:question).permit(:content, :title).merge(user_id: current_user.id)
-    end
+  def upvote
+    @question = Question.find(params[:id])
+    @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: 1)
+    redirect_to question_path(@question)
   end
+
+  def downvote
+    @question = Question.find(params[:id])
+    @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: -1)
+    redirect_to question_path(@question)
+  end
+
+  def destroy
+    @question = Question.find_by(id: params[:id])
+    @question.destroy
+    redirect_to questions_path
+  end
+
+  private
+
+  def question_params
+    params.require(:question).permit(:content, :title).merge(user_id: current_user.id)
+  end
+end
