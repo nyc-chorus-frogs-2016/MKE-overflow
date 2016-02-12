@@ -1,13 +1,21 @@
 <%= render partial: "vote_question", layout: false, object: @question %>
 <h1><%= @question.title %></h1> : <%= @question.content %></h1>
-
 <% if current_user == @question.user %>
   <%= link_to 'Delete Question', question_path(@question), method: :delete %>
   <%= link_to 'Edit Question', edit_question_path(@question)%>
+<% if @question.status == 'open' %>
+ <%= form_for @question, url: "/questions/#{@question.id}/lock", method: :put do |t| %>
+     <%= t.hidden_field :status, :value=>"lock"%>
+     <%= t.submit "Lock post" %>
+   <% end %>
+   <%end %>
 <% end %>
 
 <ul>
   <h3> Current Answers </h3>
+  <% if @question.status == 'lock'%>
+  <h4>This post is locked</h4>
+  <% end %>
   <% @question.answers.each do |answer| %>
     <%= render partial: "vote_answer", layout: false, object: answer %>
     <li>Content:<%= answer.content %></li>
@@ -19,7 +27,8 @@
   <% end %>
 </ul>
 
-<% if logged_in? && current_user != @question.user%>
+<% if logged_in? && current_user != @question.user && !locked?(@question)%>
+
   <%= form_for [@question, @answer] do |f| %>
   <div>
     <%= f.label :content%>
@@ -30,3 +39,5 @@
   </div>
   <%end%>
 <% end%>
+
+

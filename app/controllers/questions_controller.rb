@@ -43,17 +43,32 @@ class QuestionsController < ApplicationController
     end
   end
 
+
   def upvote
     @question = Question.find_by(id: params[:id])
     @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: 1)
     redirect_to question_path(@question)
   end
 
+  def lock
+    @question = Question.find_by(id: params[:id])
+    @question.update_attributes(question_params)
+    redirect_to question_path(@question)
+  end
+
+    def destroy
+      @question = Question.find_by(id: params[:id])
+      @question.destroy
+      redirect_to questions_path
+    end
+
+
   def downvote
     @question = Question.find_by(id: params[:id])
     @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: -1)
     redirect_to question_path(@question)
   end
+
 
   def destroy
     @question = Question.find_by(id: params[:id])
@@ -65,5 +80,10 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:content, :title).merge(user_id: current_user.id)
+
+    def question_params
+      params.require(:question).permit(:content, :title, :status).merge(user_id: current_user.id)
+    end
+
   end
 end

@@ -4,6 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string   :title, null: false
       t.string   :content, null: false
       t.integer  :user_id, null: false
+      t.string   :status, default: "open"
 
       t.timestamps null: false
     end

@@ -12,18 +12,20 @@
       <%= content_tag :div, msg, class: "flash-#{name}" %>
     <% end %>
   </div>
+  <h1> WELCOME TO MKE OVERFLOW</h1>
+  <ul>
   <div class="navigation-bar">
     <% if current_user %>
-       Welcome <%= link_to current_user.username, user_path(current_user) %>
-       <%= link_to 'Log out', session_path(current_user.id), method: :delete %>
+       <li>Welcome <%= link_to current_user.username, user_path(current_user) %></li>
+      <li><%= link_to 'Log out', session_path(current_user.id), method: :delete %></li>
     <% else %>
-       <%= link_to 'Log in', new_session_path %>
-       <%= link_to 'Register', new_user_path%>
+      <li> <%= link_to 'Log in', new_session_path %></li>
+       <li><%= link_to 'Register', new_user_path%></li>
     <% end %>
     <%= link_to 'Home', root_url %>
     <%= link_to 'Most Voted Questions', popular_path %>
   </div>
 <%= yield %>
-
+</ul>
 </body>
 </html>
