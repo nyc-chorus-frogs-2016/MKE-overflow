@@ -6,8 +6,8 @@ Rails.application.routes.draw do
         post 'downvote'
       end
     resources :answers, only: [:create, :new, :edit, :update, :destroy] do
-      resources :comments, only: [:created, :new, :edit, :update, :destroy]
-      resources :votes, only: [:created, :new, :edit, :update, :destroy]
+      resources :comments, only: [:create, :new, :edit, :update, :destroy]
+      resources :votes, only: [:create, :new, :edit, :update, :destroy]
        member do
         post 'upvote'
         post 'downvote'

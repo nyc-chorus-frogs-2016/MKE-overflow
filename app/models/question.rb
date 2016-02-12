@@ -19,7 +19,7 @@ class Question < ActiveRecord::Base
   def total_votes
     @vote_total = 0
     self.votes.each do |vote|
-      @vote_total = vote.vote_amount + @vote_total
+      @vote_total += vote.vote_amount
     end
     @vote_total
   end
