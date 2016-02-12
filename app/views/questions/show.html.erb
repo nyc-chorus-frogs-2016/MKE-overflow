@@ -2,8 +2,8 @@
 <h1><%= @question.title %></h1> : <%= @question.content %></h1>
 
 <% if current_user == @question.user %>
-  <%= link_to 'Delete post', question_path(@question), method: :delete %>
-  <%= link_to 'Edit post', edit_question_path(@question)%>
+  <%= link_to 'Delete Question', question_path(@question), method: :delete %>
+  <%= link_to 'Edit Question', edit_question_path(@question)%>
 <% end %>
 
 <ul>
@@ -26,7 +26,7 @@
     <%= f.text_field :content%>
   </div>
   <div>
-    <%= f.submit value='Add answer'%>
+    <%= f.submit value='Add Answer'%>
   </div>
   <%end%>
 <% end%>

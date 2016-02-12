@@ -9,8 +9,8 @@
   <%= long_form_date(question.created_at) %>
   <li><%= question.user.username%></li>
   <% if current_user == question.user %>
-    <%= link_to 'Delete post', question_path(question), method: :delete %>
-    <%= link_to 'Edit post', edit_question_path(question)%>
+    <%= link_to 'Delete Question', question_path(question), method: :delete %>
+    <%= link_to 'Edit Question', edit_question_path(question)%>
   <% end %>
   <!-- REmove this later -->
   <br></br>
