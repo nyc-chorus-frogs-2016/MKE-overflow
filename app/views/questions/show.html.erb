@@ -11,13 +11,14 @@
   <li>Author:<%= answer.user.username %></li>
   <% end %>
 </ul>
-
-<%= form_for [@question, @answer] do |f| %>
-<div>
-  <%= f.label :content%>
-  <%= f.text_field :content%>
-</div>
-<div>
-  <%= f.submit value='Add answer'%>
-</div>
-<%end%>
+<% if logged_in?%>
+  <%= form_for [@question, @answer] do |f| %>
+  <div>
+    <%= f.label :content%>
+    <%= f.text_field :content%>
+  </div>
+  <div>
+    <%= f.submit value='Add answer'%>
+  </div>
+  <%end%>
+<% end%>
