@@ -39,13 +39,13 @@ class QuestionsController < ApplicationController
   end
 
   def upvote
-    @question = Question.find(params[:id])
+    @question = Question.find_by(id: params[:id])
     @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: 1)
     redirect_to question_path(@question)
   end
 
   def downvote
-    @question = Question.find(params[:id])
+    @question = Question.find_by(id: params[:id])
     @question.votes.create(user_id: current_user.id, votable_id: @question.id, vote_amount: -1)
     redirect_to question_path(@question)
   end

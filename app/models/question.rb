@@ -13,15 +13,11 @@ class Question < ActiveRecord::Base
   end
 
   def self.trending
-    # how are we defining questions
+    # how are we defining trending. most recent comment? answer?
   end
 
   def total_votes
-    @vote_total = 0
-    self.votes.each do |vote|
-      @vote_total += vote.vote_amount
-    end
-    @vote_total
+    votes.sum(:vote_amount)
   end
 
 end
