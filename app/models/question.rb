@@ -15,4 +15,13 @@ class Question < ActiveRecord::Base
   def self.trending
     # how are we defining questions
   end
+
+  def total_votes
+    @vote_total = 0
+    self.votes.each do |vote|
+      @vote_total += vote.vote_amount
+    end
+    @vote_total
+  end
+
 end
