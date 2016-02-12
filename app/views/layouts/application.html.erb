@@ -22,7 +22,8 @@
       <li> <%= link_to 'Log in', new_session_path %></li>
        <li><%= link_to 'Register', new_user_path%></li>
     <% end %>
-    <a href="/">Home</a>
+    <%= link_to 'Home', root_url %>
+    <%= link_to 'Most Voted Questions', popular_path %>
   </div>
 <%= yield %>
 </ul>

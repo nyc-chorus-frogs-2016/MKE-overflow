@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   get 'questions/recent' => 'questions#recent'
   get 'questions/trending' => 'questions#trending'
-  get 'question/popular' => 'questions#popular'
+  get 'popular' => 'questions#popular'
 
   put 'questions/:id/lock' => 'questions#lock'
   root 'questions#index'

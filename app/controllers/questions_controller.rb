@@ -3,6 +3,11 @@ class QuestionsController < ApplicationController
     @questions = Question.most_recent
   end
 
+  def popular
+    @questions = Question.most_votes
+    render 'index'
+  end
+
   def show
     @question = Question.find_by(id: params[:id])
     @answer = Answer.new
