@@ -7,14 +7,6 @@ class User < ActiveRecord::Base
 	validates :username, presence: true, uniqueness: true
 
   def has_voted?(question)
-    @response = :true
-    self.votes.each do |vote|
-      if question.votes.include?(vote)
-        @response = true
-      else
-        @response = false
-      end
-    end
-    @response
+    Question.votes.where(user: current_user).count > 0
   end
 end
