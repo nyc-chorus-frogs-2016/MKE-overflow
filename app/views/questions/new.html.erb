@@ -10,6 +10,14 @@
   </div>
 
   <div>
+   <%= fields_for @tag do |u| %>
+     <%= u.label :tags %>
+     <%= u.text_field :name, placeholder: "seperate by space =)" %>
+   <% end %>
+  </div>
+
+
+  <div>
     <%= f.submit %>
   </div>
 <% end %>
