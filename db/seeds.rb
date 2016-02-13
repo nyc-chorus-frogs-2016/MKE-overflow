@@ -15,7 +15,7 @@ end
 end
 
 50.times do
-	Answer.create!(content: Faker::Hipster.paragraph, question_id: Question.all.sample.id, user_id: User.all.sample.id)
+	Answer.create!(content: Faker::Hipster.paragraph, question_id: Question.all.sample.id, user_id: User.all.sample.id, best_answer: false)
 end
 
 25.times do
