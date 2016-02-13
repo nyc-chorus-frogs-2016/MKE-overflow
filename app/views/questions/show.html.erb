@@ -1,5 +1,12 @@
 <%= render partial: "vote_question", layout: false, object: @question %>
 <h1><%= @question.title %></h1> : <%= @question.content %></h1>
+<%= link_to 'comment', new_question_comment_path(@question) %>
+
+<% @question.comments.each do |comment| %>
+<p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
+<% end %>
+
+
 <% if current_user == @question.user %>
   <%= link_to 'Delete Question', question_path(@question), method: :delete %>
   <%= link_to 'Edit Question', edit_question_path(@question)%>
@@ -23,6 +30,15 @@
       <li><%= link_to 'Edit Answer', edit_question_answer_path(@question, answer)%></li>
       <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
     <%end%>
+    <li>
+
+<%= link_to 'comment', new_question_answer_comment_path(@question, answer) %>
+      <% answer.comments.each do |comment| %>
+      <p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
+<% end %>
+    </li>
+
+
   <li>Author:<%= answer.user.username %></li>
   <% end %>
 </ul>
