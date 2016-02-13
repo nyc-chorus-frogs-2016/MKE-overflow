@@ -3,6 +3,9 @@ class Question < ActiveRecord::Base
   has_many :answers
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
+  has_many :question_tags
+  has_many :tags, through: :question_tags
+
 
   def self.most_recent
     Question.order(created_at: :desc)
@@ -35,7 +38,6 @@ class Question < ActiveRecord::Base
     return true if best == []
   end
 
-
   def locked?
     if self.status == "lock"
       return true
@@ -43,4 +45,5 @@ class Question < ActiveRecord::Base
       false
     end
   end
+
 end

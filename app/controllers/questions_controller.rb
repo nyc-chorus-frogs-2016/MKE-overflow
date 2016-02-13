@@ -16,11 +16,16 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @tag = Tag.new
   end
 
   def create
     @question = Question.new(question_params)
     if @question.save
+    tag_params[:name].split(' ').each do |tag_name|
+      tag = Tag.create(name: tag_name)
+      @question.tags << tag
+    end
       flash.notice = "Your question was successfully created."
       redirect_to question_path(@question)
     else
@@ -81,5 +86,9 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:content, :title, :status).merge(user_id: current_user.id)
+    end
+
+    def tag_params
+      params.require(:tag).permit(:name)
     end
 end
