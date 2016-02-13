@@ -24,9 +24,16 @@ end
 25.times do
   Comment.create!(content: Faker::Hipster.paragraph, commentable_id: Answer.all.sample.id,  user_id: User.all.sample.id, commentable_type: "Answer" )
 end
-5.times do
+25.times do
   Vote.create!(votable_id: Question.all.sample.id,  user_id: User.all.sample.id, votable_type: "Question", vote_amount: 1 )
 end
-5.times do
+25.times do
   Vote.create!(votable_id: Question.all.sample.id,  user_id: User.all.sample.id, votable_type: "Question", vote_amount: -1 )
+end
+
+25.times do
+  Vote.create!(votable_id: Question.all.sample.id,  user_id: User.all.sample.id, votable_type: "Answer", vote_amount: 1 )
+end
+25.times do
+  Vote.create!(votable_id: Question.all.sample.id,  user_id: User.all.sample.id, votable_type: "Answer", vote_amount: -1 )
 end

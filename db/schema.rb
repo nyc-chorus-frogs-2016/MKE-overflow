@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160212160900) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     null: false
-    t.string   "best_answer", null: false
+    t.string   "best_answer"
     t.integer  "user_id",     null: false
     t.integer  "question_id", null: false
     t.datetime "created_at",  null: false
