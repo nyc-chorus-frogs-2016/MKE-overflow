@@ -2,6 +2,10 @@
 <h1><%= @question.title %></h1> : <%= @question.content %></h1>
 <%= link_to 'comment', new_question_comment_path(@question) %>
 
+<h3>Tags: <% @question.tags.each do |tag| %>
+ <%= link_to tag.name, tag_path(tag) %>
+<% end %></h3>
+
 <% @question.comments.each do |comment| %>
 <p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
 <% end %>

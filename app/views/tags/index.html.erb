@@ -1,0 +1,4 @@
+<h1>tags</h1>
+<% @tags.each do |tag| %>
+<h3> <%= link_to tag.name, tag_path(tag) %> <%=tag.questions.count %></h3>
+  <% end %>

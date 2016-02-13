@@ -1,0 +1,6 @@
+<h1> <%= @tag.name %></h1>
+
+
+<% @tag.questions.each do |question| %>
+<h3> <%= link_to question.content, question_path(question) %> </h3>
+  <% end %>

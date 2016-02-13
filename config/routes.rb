@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only: [:new, :create, :destroy]
-
+  resources :tags, only: [:index, :show, :destroy]
   resources :users, only: [:new, :create, :show]
   get 'questions/recent' => 'questions#recent'
   get 'questions/trending' => 'questions#trending'

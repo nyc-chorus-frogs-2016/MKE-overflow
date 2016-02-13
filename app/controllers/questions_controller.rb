@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     if @question.save
     tag_params[:name].split(' ').each do |tag_name|
-      tag = Tag.create(name: tag_name)
+      tag = Tag.find_or_create_by(name: tag_name)
       @question.tags << tag
     end
       flash.notice = "Your question was successfully created."
