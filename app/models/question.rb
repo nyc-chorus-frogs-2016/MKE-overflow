@@ -21,15 +21,18 @@ class Question < ActiveRecord::Base
   end
 
   def sort_answers
-    answers.joins(:votes).group(:id).order('sum (votes.vote_amount) desc')
+    sort_array=answers.sort_by do |answer|
+      answer.total_votes
+    end
+    sort_array.reverse!
   end
 
 end
 
   def locked?(question)
-     if question.status == "lock"
-    return true
-  else
-    false
+    if question.status == "lock"
+      return true
+    else
+      false
+    end
   end
-end

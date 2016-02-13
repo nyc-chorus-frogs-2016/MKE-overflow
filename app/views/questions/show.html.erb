@@ -32,7 +32,7 @@
     <%end%>
     <li>
 
-<%= link_to 'comment', new_question_answer_comment_path(@question, answer) %>
+<%= link_to 'leave a comment', new_question_answer_comment_path(@question, answer) %>
       <% answer.comments.each do |comment| %>
       <p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
 <% end %>
@@ -40,6 +40,7 @@
 
 
   <li>Author:<%= answer.user.username %></li>
+  <hr>
   <% end %>
 </ul>
 

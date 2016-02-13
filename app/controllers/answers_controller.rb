@@ -42,7 +42,6 @@ class AnswersController < ApplicationController
   end
 
   private
-
   def create_answer(question)
     @answer = @question.answers.create(answer_params)
     if @answer.save
