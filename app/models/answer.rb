@@ -11,4 +11,6 @@ class Answer < ActiveRecord::Base
     end
     @vote_total
   end
+
+
 end
