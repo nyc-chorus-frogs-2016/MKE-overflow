@@ -41,6 +41,7 @@ class AnswersController < ApplicationController
     redirect_to question_path(answer.question)
   end
 
+
   private
   def create_answer(question)
     @answer = @question.answers.create(answer_params)
@@ -53,6 +54,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:content).merge(user: current_user)
+    params.require(:answer).permit(:content, :best_answer).merge(user: current_user)
   end
 end

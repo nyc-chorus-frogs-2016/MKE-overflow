@@ -27,12 +27,20 @@ class Question < ActiveRecord::Base
     sort_array.reverse!
   end
 
-end
+    def select_best?
+      best = []
+    self.answers.map do |answer|
+      best << answer if answer.best_answer == "true"
+    end
+    return true if best == []
+  end
 
-  def locked?(question)
-    if question.status == "lock"
+
+  def locked?
+    if self.status == "lock"
       return true
     else
       false
     end
   end
+end

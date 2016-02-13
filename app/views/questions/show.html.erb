@@ -31,6 +31,16 @@
       <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
     <%end%>
     <li>
+  <% if answer.best_answer == 'true' %>
+  <h4>This is the BEST ANSWER!</h4>
+  <% end %>
+<% if  @question.select_best? %>
+
+  <%= form_for answer, url: "/questions/#{@question.id}/answers/#{answer.id}", method: :put do |t| %>
+     <%= t.hidden_field :best_answer, :value=>"true"%>
+     <%= t.submit "Best Answer" %>
+   <% end %>
+<%end %>
 
 <%= link_to 'leave a comment', new_question_answer_comment_path(@question, answer) %>
       <% answer.comments.each do |comment| %>
@@ -44,7 +54,7 @@
   <% end %>
 </ul>
 
-<% if logged_in? && current_user != @question.user && !locked?(@question)%>
+<% if logged_in? && current_user != @question.user && !@question.locked?%>
 
   <%= form_for [@question, @answer] do |f| %>
   <div>
