@@ -1,0 +1,4 @@
+ <%= form_for @question, url: "/questions/#{@question.id}/lock", method: :put do |t| %>
+     <%= t.hidden_field :status, :value=>"lock"%>
+     <%= t.submit "Lock post" %>
+   <% end %>

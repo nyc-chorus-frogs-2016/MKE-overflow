@@ -1,0 +1,4 @@
+<%= form_for answer, url: "/questions/#{@question.id}/answers/#{answer.id}", method: :put do |t| %>
+     <%= t.hidden_field :best_answer, :value=>"true"%>
+     <%= t.submit "Best Answer" %>
+<% end %>
