@@ -11,10 +11,7 @@
   <%= link_to 'Delete Question', question_path(@question), method: :delete %>
   <%= link_to 'Edit Question', edit_question_path(@question)%>
 <% if @question.status == 'open' %>
- <%= form_for @question, url: "/questions/#{@question.id}/lock", method: :put do |t| %>
-     <%= t.hidden_field :status, :value=>"lock"%>
-     <%= t.submit "Lock post" %>
-   <% end %>
+ <%= render partial: "lock_form", layout: false, locals: {question: @question} %>
    <%end %>
 <% end %>
 
@@ -26,31 +23,30 @@
   <% @answers.each do |answer| %>
     <%= render partial: "vote_answer", layout: false, object: answer %>
     <li>Content:<%= answer.content %></li>
+
      <% if current_user == answer.user %>
       <li><%= link_to 'Edit Answer', edit_question_answer_path(@question, answer)%></li>
       <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
     <%end%>
-    <li>
+
+  <li>
   <% if answer.best_answer == 'true' %>
   <h4>This is the BEST ANSWER!</h4>
   <% end %>
-<% if  @question.select_best? %>
-
-  <%= form_for answer, url: "/questions/#{@question.id}/answers/#{answer.id}", method: :put do |t| %>
-     <%= t.hidden_field :best_answer, :value=>"true"%>
-     <%= t.submit "Best Answer" %>
-   <% end %>
-<%end %>
-
-<%= link_to 'leave a comment', new_question_answer_comment_path(@question, answer) %>
+  <% if  @question.select_best? && current_user == @question.user %>
+    <%= render partial: "/answers/best_answer_form", layout: false, locals: {answer: answer} %>
+  <% end %>
+</li>
+<li>
+  <%= link_to 'leave a comment', new_question_answer_comment_path(@question, answer) %>
       <% answer.comments.each do |comment| %>
       <p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
-<% end %>
-    </li>
+    <% end %>
+  </li>
 
 
-  <li>Author:<%= answer.user.username %></li>
-  <hr>
+    <li>Author:<%= answer.user.username %></li>
+    <hr>
   <% end %>
 </ul>
 
