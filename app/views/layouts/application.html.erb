@@ -23,7 +23,9 @@
        <li><%= link_to 'Register', new_user_path%></li>
     <% end %>
     <%= link_to 'Home', root_url %>
-    <%= link_to 'Most Voted Questions', popular_path %>
+    <%= link_to 'Most Recent', root_url %>
+    <%= link_to '#Trending', popular_path %>
+    <%= link_to '#Tags', tags_path %>
   </div>
 <%= yield %>
 </ul>
