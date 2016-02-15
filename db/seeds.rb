@@ -37,3 +37,7 @@ end
 25.times do
   Vote.create!(votable_id: Question.all.sample.id,  user_id: User.all.sample.id, votable_type: "Answer", vote_amount: -1 )
 end
+
+25.times do
+  Question.all.sample.tags << Tag.create!(name: Faker::Name.title)
+end
