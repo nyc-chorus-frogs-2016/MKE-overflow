@@ -38,6 +38,22 @@ end
   Vote.create!(votable_id: Question.all.sample.id,  user_id: User.all.sample.id, votable_type: "Answer", vote_amount: -1 )
 end
 
-25.times do
-  Question.all.sample.tags << Tag.create!(name: Faker::Name.title)
+5.times do
+  Question.first.tags << Tag.create!(name: Faker::Name.title)
+
 end
+
+5.times do
+  Question.last.tags << Tag.create!(name: Faker::Name.title)
+end
+
+
+  Question.last.tags << Tag.find_or_create_by(name: "hello")
+10.times do
+ Question.all.sample.tags << Tag.find_or_create_by(name: "hello")
+end
+
+10.times do
+ Question.all.sample.tags << Tag.find_or_create_by(name: "DBC")
+end
+
