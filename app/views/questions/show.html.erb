@@ -1,0 +1,70 @@
+<%= render partial: "vote_question", layout: false, object: @question %>
+<h1><%= @question.title %></h1> : <%= @question.content %></h1>
+<%= link_to 'comment', new_question_comment_path(@question) %>
+
+<h3>Tags: <% @question.tags.each do |tag| %>
+ <%= link_to tag.name, tag_path(tag) %>
+<% end %></h3>
+
+<% @question.comments.each do |comment| %>
+<p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
+<% end %>
+
+
+<% if current_user == @question.user %>
+  <%= link_to 'Delete Question', question_path(@question), method: :delete %>
+  <%= link_to 'Edit Question', edit_question_path(@question)%>
+<% if @question.status == 'open' %>
+ <%= render partial: "lock_form", layout: false, locals: {question: @question} %>
+   <%end %>
+<% end %>
+
+<ul>
+  <h3> Current Answers </h3>
+  <% if @question.status == 'lock'%>
+  <h4>This post is locked</h4>
+  <% end %>
+  <% @answers.each do |answer| %>
+    <%= render partial: "vote_answer", layout: false, object: answer %>
+    <li>Content:<%= answer.content %></li>
+
+     <% if current_user == answer.user %>
+      <li><%= link_to 'Edit Answer', edit_question_answer_path(@question, answer)%></li>
+      <li><%= link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete %></li>
+    <%end%>
+
+  <li>
+  <% if answer.best_answer == 'true' %>
+  <h4>This is the BEST ANSWER!</h4>
+  <% end %>
+  <% if  @question.select_best? && current_user == @question.user %>
+    <%= render partial: "/answers/best_answer_form", layout: false, locals: {answer: answer} %>
+  <% end %>
+</li>
+<li>
+  <%= link_to 'leave a comment', new_question_answer_comment_path(@question, answer) %>
+      <% answer.comments.each do |comment| %>
+      <p><%= comment.content %> By:  <%= comment.commenter.username %>  <%= comment.updated_at %></p>
+    <% end %>
+  </li>
+
+
+    <li>Author:<%= answer.user.username %></li>
+    <hr>
+  <% end %>
+</ul>
+
+<% if logged_in? && current_user != @question.user && !@question.locked?%>
+
+  <%= form_for [@question, @answer] do |f| %>
+  <div>
+    <%= f.label :content%>
+    <%= f.text_field :content%>
+  </div>
+  <div>
+    <%= f.submit value='Add Answer'%>
+  </div>
+  <%end%>
+<% end%>
+
+

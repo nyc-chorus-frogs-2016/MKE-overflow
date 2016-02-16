@@ -1,0 +1,13 @@
+
+<h1>New Comment for <%= @context.content %></h1>
+
+
+<%= form_for [@context, @comment], url:two_url(@context), method: :post do |f| %>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control", placeholder: "Enter a comment here." %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <%= f.submit %>
+<% end %>
+

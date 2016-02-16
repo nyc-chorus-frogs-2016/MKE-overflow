@@ -1,0 +1,8 @@
+
+Answer Vote Total:<%= vote_answer.total_votes%>
+
+<% if logged_in? && current_user != vote_answer.user && current_user.has_voted_answer?(vote_answer) == false%>
+  <%= button_to 'Upvote', upvote_question_answer_path(vote_answer.question, vote_answer), method: :post%>
+  <%= button_to 'Downvote', downvote_question_answer_path(vote_answer.question, vote_answer), method: :post%>
+<%end%>
+

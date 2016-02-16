@@ -1,0 +1,23 @@
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+   <%= fields_for @tag do |u| %>
+     <%= u.label :tags %>
+     <%= u.text_field :name, placeholder: "seperate by space =)" %>
+   <% end %>
+  </div>
+
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
